@@ -10,14 +10,20 @@
 - [] Neighbors list
 
 ### Announcements
-- [] Bulletin Board
-- [] Notifications (email)
-
 - [] Announcements issuing
+- [] Notifications (email/push?)
+
+### Financial Administration
 - [] Periodic balance sheet
-- [] Neighbor registration / Premises owner
-- [] Invoices issuing
-- [] Admin special options
+- [] Payment and debt control
+- [] Reports/invoices generation
+
+### Incidents and Maintenance
+- [] Incidents comunication by neighbors
+- [] Suppliers list
+- [] Incident status tracking
+
+---
 
 ### Non Functional Requirements
 - [] Personal data secure processing

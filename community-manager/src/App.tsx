@@ -1,10 +1,11 @@
-import './App.css'
-import { communityName } from './data/global_variables';
+import { RouterProvider } from 'react-router';
+import './App.css';
+import { router } from './router/app.router';
 
 export default function App() {
   return (
     <>
-      <h1>Comunidad de Vecinos {communityName}</h1>
+      <RouterProvider router={router} />
     </>
   );
 }

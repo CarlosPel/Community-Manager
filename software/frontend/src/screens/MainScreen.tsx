@@ -5,6 +5,9 @@ import { BulletinBoard } from "../components/BulletinBoard";
 export const MainScreen = () => {
     return (
         <div>
+            <div>
+                
+            </div>
             <h1>Comunidad de Vecinos {communityName}</h1>
             <BulletinBoard />
         </div>

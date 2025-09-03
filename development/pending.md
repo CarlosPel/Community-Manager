@@ -1,8 +1,8 @@
 # Pending Tasks
 ### Frontend
-- fetchAnnouncements
+- []fetchAnnouncements
 
 ### API REST
-- announcements
+- []announcements
 
 ### DDBB

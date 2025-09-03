@@ -1,8 +1,9 @@
 -- ============================================
--- Community Manager Init SQL Script
+-- Community Manager Init SQL Script (Idempotente)
 -- ============================================
 
 -- Incident
+DROP TABLE IF EXISTS Incident CASCADE;
 CREATE TABLE Incident (
     id INT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE Incident (
 );
 
 -- Announcement
+DROP TABLE IF EXISTS Announcement CASCADE;
 CREATE TABLE Announcement (
     id INT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
@@ -17,6 +19,7 @@ CREATE TABLE Announcement (
 );
 
 -- Person
+DROP TABLE IF EXISTS Person CASCADE;
 CREATE TABLE Person (
     id INT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -25,19 +28,15 @@ CREATE TABLE Person (
 );
 
 -- Premises
+DROP TABLE IF EXISTS Premises CASCADE;
 CREATE TABLE Premises (
     id INT PRIMARY KEY,
     tenant_id INT NOT NULL,
     FOREIGN KEY (tenant_id) REFERENCES Person(id)
 );
 
--- -- Tenant (Person subtype)
--- CREATE TABLE Tenant (
---     id INT PRIMARY KEY,
---     FOREIGN KEY (id) REFERENCES Person(id)
--- );
-
 -- Owner (Person subtype)
+DROP TABLE IF EXISTS Owner CASCADE;
 CREATE TABLE Owner (
     id INT PRIMARY KEY,
     premises_id INT NOT NULL,
@@ -46,6 +45,7 @@ CREATE TABLE Owner (
 );
 
 -- Apartment
+DROP TABLE IF EXISTS Apartment CASCADE;
 CREATE TABLE Apartment (
     id INT PRIMARY KEY,
     floor INT,
@@ -55,6 +55,7 @@ CREATE TABLE Apartment (
 );
 
 -- Neighbor (subtipo de Person)
+DROP TABLE IF EXISTS Neighbor CASCADE;
 CREATE TABLE Neighbor (
     id INT PRIMARY KEY,
     apartment_id INT NOT NULL,

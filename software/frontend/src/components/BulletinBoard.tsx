@@ -1,31 +1,18 @@
 import { useState } from "react";
 import ReactPullToRefresh from "react-pull-to-refresh";
 
-class Announcement {
-    title!: string;
-    content!: string;
-}
-
-const fetchAnnouncements = (): Announcement[] => {
-    return [
-        { title: "Anuncio 1", content: "Contenido del anuncio 1" },
-        { title: "Anuncio 2", content: "Contenido del anuncio 2" },
-        { title: "Anuncio 3", content: "Contenido del anuncio 3" }
-    ];
-};
-
-export const BulletinBoard = () => {
-    const [announcements, setAnnouncements] = useState(fetchAnnouncements());
+export const BulletinBoard = async () => {
+    const [announcements, loadAnnouncements] = useState(fetchAnnouncements());
 
     const refreshAnnouncements = async (): Promise<void> => {
-        setAnnouncements(fetchAnnouncements());
+        loadAnnouncements(fetchAnnouncements());
     }
 
     return (
         <ReactPullToRefresh onRefresh={refreshAnnouncements}>
             <div>
                 <h2>Tablón de Anuncios</h2>
-                {announcements.map((announcement, index) => (
+                {(await announcements).map((announcement: { title: string; content: string; date: string; }, index: number) => (
                     <div key={index}>
                         <h3>{announcement.title}</h3>
                         <p>{announcement.content}</p>
@@ -34,4 +21,12 @@ export const BulletinBoard = () => {
             </div>
         </ReactPullToRefresh>
     );
+};
+
+async function fetchAnnouncements() {
+    const response = await fetch("/api/announcements"); // reemplaza con tu endpoint real
+    if (!response.ok) {
+        throw new Error("Error al obtener anuncios");
+    }
+    return response.json();
 };

@@ -1,5 +1,5 @@
 -- ============================================
--- Community Manager Tables SQL Script
+-- Community Manager Init SQL Script
 -- ============================================
 
 -- Incident

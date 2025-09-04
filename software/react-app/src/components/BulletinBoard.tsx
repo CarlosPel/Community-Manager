@@ -1,22 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactPullToRefresh from "react-pull-to-refresh";
+import { AnnouncementCard } from "./AnnouncementCard";
 
-export const BulletinBoard = async () => {
-    const [announcements, loadAnnouncements] = useState(fetchAnnouncements());
+export const BulletinBoard = () => {
+    const [announcements, setAnnouncements] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const refreshAnnouncements = async (): Promise<void> => {
-        loadAnnouncements(fetchAnnouncements());
-    }
+    const fetchAnnouncementsData = async () => {
+        try {
+            setLoading(true);
+            setError(null); // resetear error antes de intentar
+            const data = await fetchAnnouncements();
+            setAnnouncements(data);
+        } catch (err) {
+            console.error("Error al cargar anuncios:", err);
+            setError("Error al cargar los anuncios. Intenta nuevamente.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const refreshAnnouncements = async () => {
+        await fetchAnnouncementsData();
+    };
+
+    useEffect(() => {
+        fetchAnnouncementsData();
+    }, []);
 
     return (
         <ReactPullToRefresh onRefresh={refreshAnnouncements}>
             <div>
                 <h2>Tablón de Anuncios</h2>
-                {(await announcements).map((announcement: { title: string; content: string; date: string; }, index: number) => (
-                    <div key={index}>
-                        <h3>{announcement.title}</h3>
-                        <p>{announcement.content}</p>
-                    </div>
+
+                {loading && <p>Cargando anuncios...</p>}
+
+                {error && (
+                    <p className="text-red-500 font-bold">
+                        {error}
+                    </p>
+                )}
+
+                {!loading && !error && announcements.length === 0 && (
+                    <p>No hay anuncios disponibles.</p>
+                )}
+
+                {!loading && !error && announcements.map((announcement, index) => (
+                    <AnnouncementCard
+                        key={index}
+                        title={announcement.title}
+                        content={announcement.content}
+                        date={announcement.date}
+                    />
                 ))}
             </div>
         </ReactPullToRefresh>
@@ -29,4 +65,4 @@ async function fetchAnnouncements() {
         throw new Error("Error al obtener anuncios");
     }
     return response.json();
-};
+}

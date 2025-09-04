@@ -1,10 +1,10 @@
 type AnnouncementCardProps = {
     title: string;
-    description: string;
+    content: string;
     date: string;
 };
 
-export const AnnouncementCard = ({ title, description, date }: AnnouncementCardProps) => {
+export const AnnouncementCard = ({ title, content: description, date }: AnnouncementCardProps) => {
     return (
         <div className="border rounded-lg shadow p-4 max-w-sm">
             <h2 className="text-xl font-bold mb-2">{title}</h2>

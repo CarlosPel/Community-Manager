@@ -7,6 +7,10 @@ export const router = createBrowserRouter([
         element: <MainScreen />,
     },
     {
+        path: "/profile",
+        element: <div>Perfil de Usuario</div>,
+    },
+    {
         path: "*",
         element: <Navigate to="/" />,
     }

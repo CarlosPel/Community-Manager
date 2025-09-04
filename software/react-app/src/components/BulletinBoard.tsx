@@ -15,7 +15,7 @@ async function fetchAnnouncements(): Promise<Announcement[]> {
 
 export const BulletinBoard = () => (
   <Board
-    title="Anuncios"
+    itemName="Anuncios"
     fetchData={fetchAnnouncements}
     renderItem={(announcement: Announcement, index: number) => (
       <AnnouncementCard

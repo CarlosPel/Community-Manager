@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import ReactPullToRefresh from "react-pull-to-refresh";
 
 type BoardProps<T> = {
-  title: string;
+  itemName: string;
   fetchData: () => Promise<T[]>;
   renderItem: (item: T, index: number) => React.ReactNode;
   emptyMessage?: string;
 };
 
-export function Board<T>({ title, fetchData, renderItem, emptyMessage }: BoardProps<T>) {
+export function Board<T>({ itemName, fetchData, renderItem, emptyMessage }: BoardProps<T>) {
   const [items, setItems] = useState<T[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,8 +20,7 @@ export function Board<T>({ title, fetchData, renderItem, emptyMessage }: BoardPr
       const data = await fetchData();
       setItems(data);
     } catch (err) {
-      console.error(`Error al cargar ${title}:`, err);
-      setError(`Error al cargar ${title.toLowerCase()}. Intenta nuevamente.`);
+      setError(`Error al cargar ${itemName.toLowerCase()}. Intenta nuevamente.`);
     } finally {
       setLoading(false);
     }
@@ -34,14 +33,14 @@ export function Board<T>({ title, fetchData, renderItem, emptyMessage }: BoardPr
   return (
     <ReactPullToRefresh onRefresh={loadData}>
       <div>
-        <h2>{title}</h2>
+        {/* <h2>{title}</h2> */}
 
-        {loading && <p>Cargando {title.toLowerCase()}...</p>}
+        {loading && <p>Cargando {itemName.toLowerCase()}...</p>}
 
         {error && <p className="text-red-500 font-bold">{error}</p>}
 
         {!loading && !error && items.length === 0 && (
-          <p>{emptyMessage || `No hay ${title.toLowerCase()} disponibles.`}</p>
+          <p>{emptyMessage || `No hay ${itemName.toLowerCase()} disponibles.`}</p>
         )}
 
         {!loading && !error && items.map((item, index) => renderItem(item, index))}

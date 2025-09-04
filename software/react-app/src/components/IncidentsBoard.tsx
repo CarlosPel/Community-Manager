@@ -17,7 +17,7 @@ type Incident = {
 
 export const IncidentsBoard = () => (
     <Board
-        title="Incidencias"
+        itemName="Incidencias"
         fetchData={fetchIncidents}
         renderItem={(incident: Incident, index: number) => (
             <IncidentCard

@@ -8,7 +8,9 @@ export const MainScreen = () => {
         <div>
             <NavMenu isHome={true} />
 
-            <h1>Comunidad de Vecinos {communityName}</h1>
+            <h1>Comunidad de Propietarios {communityName}</h1>
+
+            <h2 className="text-2xl font-bold mb-4 mt-4">Tablón de Anuncios</h2>
 
             <BulletinBoard />
         </div>

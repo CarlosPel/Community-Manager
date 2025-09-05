@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { MainScreen } from "../screens/MainScreen";
 import { IncidentsScreen } from "../screens/IncidentsScreen";
+import { ProfileScreen } from "../screens/ProfileScreen";
 
 export const router = createBrowserRouter([
     {
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/profile",
-        element: <div>Perfil de Usuario</div>,
+        element: <ProfileScreen />,
     },
     {
         path: "*",

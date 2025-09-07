@@ -7,7 +7,7 @@ export const IncidentsScreen = () => {
             <NavMenu />
 
             <h1>Incidencias</h1>
-            
+
             <IncidentsBoard />
         </div>
     )

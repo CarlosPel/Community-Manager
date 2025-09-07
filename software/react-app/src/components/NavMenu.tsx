@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { HiHome, HiMenu } from "react-icons/hi";
 import { Link } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 type NavMenuProps = {
     isHome?: boolean;
@@ -8,6 +9,7 @@ type NavMenuProps = {
 
 export const NavMenu = ({ isHome = false }: NavMenuProps) => {
     const [open, setOpen] = useState(false);
+    const { logout } = useAuth();
 
     return (
         <nav className="bg-gray-800 text-white p-4">
@@ -17,7 +19,8 @@ export const NavMenu = ({ isHome = false }: NavMenuProps) => {
                         <Link to="/" className="font-bold text-lg">
                             <HiHome size={24} className="inline mr-2" />
                         </Link>
-                    ) : null}
+                    ) : (
+                        <button onClick={logout} className="bg-red-500 text-white p-2 rounded">Cerrar sesión</button>)}
                 </div>
                 <div className="relative">
                     <button

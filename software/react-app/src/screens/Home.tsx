@@ -3,7 +3,7 @@ import '../App.css';
 import { BulletinBoard } from "../components/BulletinBoard";
 import { NavMenu } from "../components/NavMenu";
 
-export const MainScreen = () => {
+export const HomeScreen = () => {
     return (
         <div>
             <NavMenu isHome={true} />

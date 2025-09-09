@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AnnouncementsModule } from './announcements/announcements.module';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
         host: config.get('DATABASE_HOST'),
-        port: +config.get<number>('DATABASE_PORT', 5432),
+        port: 5432,
         username: config.get('DATABASE_USER'),
         password: config.get('DATABASE_PASSWORD'),
         database: config.get('DATABASE_NAME'),
@@ -21,8 +22,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         synchronize: true, // ⚠️ Borrar para despliegue en producción
       }),
     }),
+    AnnouncementsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

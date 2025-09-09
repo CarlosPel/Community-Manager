@@ -2,20 +2,22 @@
 -- Community Manager Init SQL Script (Idempotente)
 -- ============================================
 
--- Incident
-DROP TABLE IF EXISTS Incident CASCADE;
-CREATE TABLE Incident (
-    id INT PRIMARY KEY,
-    title VARCHAR(200) NOT NULL,
-    description TEXT NOT NULL
-);
-
 -- Announcement
 DROP TABLE IF EXISTS Announcement CASCADE;
 CREATE TABLE Announcement (
     id INT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     content TEXT NOT NULL
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Incident
+DROP TABLE IF EXISTS Incident CASCADE;
+CREATE TABLE Incident (
+    id INT PRIMARY KEY,
+    criticality VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    FOREIGN KEY (id) REFERENCES Announcement(id)
 );
 
 -- Person

@@ -1,17 +1,6 @@
+import { fetchAnnouncements, type Announcement } from "../services/announcementService";
 import { AnnouncementCard } from "./AnnouncementCard";
 import { Board } from "./Board";
-
-type Announcement = {
-  title: string;
-  content: string;
-  date: string;
-};
-
-async function fetchAnnouncements(): Promise<Announcement[]> {
-  const response = await fetch("/api/announcements");
-  if (!response.ok) throw new Error("Error al obtener anuncios");
-  return response.json();
-}
 
 export const BulletinBoard = () => (
   <Board

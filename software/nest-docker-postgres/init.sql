@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS Announcement CASCADE;
 CREATE TABLE Announcement (
     id INT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
-    content TEXT NOT NULL
+    content TEXT NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -64,3 +64,12 @@ CREATE TABLE Neighbor (
     FOREIGN KEY (id) REFERENCES Person(id),
     FOREIGN KEY (apartment_id) REFERENCES Apartment(id)
 );
+
+-- ----------
+-- Inserts --
+-------------
+
+-- Announcements
+INSERT INTO Announcement (id, title, content) VALUES
+(1, 'Maintenance Notice', 'Scheduled maintenance on 2024-07-01 from 10:00 to 12:00.'),
+(2, 'Community Event', 'Join us for a community BBQ on 2024-07-15 at the central park.');

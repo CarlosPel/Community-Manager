@@ -45,8 +45,11 @@ if ($resetDb -eq "y") {
     Write-Host "Reseteando la base de datos..."
     # Abrir una consola de PostgreSQL en el contenedor y ejecutar el script .sql
     $psswd = Read-Host "Contraseña:" -AsSecureString
-    $initPath = (Resolve-Path .\init.sql).Path
-    & ".\reset_db.ps1" $psswd $initPath
+    # $initPath = (Resolve-Path .\init.sql).Path
+
+    $plainPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($psswd))
+
+    Get-Content .\init.sql | docker exec -i -e PGPASSWORD=$plainPassword comunidad_db psql -h localhost -U com_admin -d NeighComm29
 }
 
 # Entrar en el directorio de la aplicación React y arrancarla

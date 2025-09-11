@@ -1,16 +1,16 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity('announcements')
+@Entity('announcement')
 export class Announcement {
   @PrimaryGeneratedColumn()
-  id?: number;
+  id!: number;
 
-  @Column()
-  title?: string;
+  @Column({ length: 200 })
+  title!: string;
 
-  @Column()
-  content?: string;
+  @Column({ type: 'text' })
+  content!: string;
 
-  @Column()
-  date?: string;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  date!: Date;
 }

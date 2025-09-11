@@ -2,7 +2,7 @@ export interface Announcement {
     id: number;
     title: string;
     content: string;
-    date: string;
+    date: Date;
 }
 
 export async function fetchAnnouncements(): Promise<Announcement[]> {

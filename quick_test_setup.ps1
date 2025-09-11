@@ -38,7 +38,7 @@ if ($retries -eq $maxRetries) {
 # Levantar la aplicación con docker-compose
 Write-Host "Iniciando los contenedores..."
 Set-Location .\software\nest-docker-postgres\
-docker-compose up -d
+docker-compose up -d --build
 
 $resetDb = Read-Host "¿Desea resetear la base de datos? (y/n)"
 if ($resetDb -eq "y") {

@@ -6,6 +6,16 @@ import checker from 'vite-plugin-checker'
 export default defineConfig({
   plugins: [
     react(),
-    checker({ typescript: true })
+    checker({ typescript: true }),
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: process.env.API_URL || 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })
+

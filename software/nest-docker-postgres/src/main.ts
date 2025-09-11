@@ -11,6 +11,8 @@ async function bootstrap() {
     credentials: true, // si usas cookies o auth
   });
 
+  app.setGlobalPrefix('api');
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

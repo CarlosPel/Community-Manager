@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { NavMenu } from "../components/NavMenu";
 
 type ProfileItems = {
     name: string;
@@ -37,8 +36,6 @@ export const ProfileScreen = () => {
 
     return (
         <div>
-            <NavMenu />
-
             <h1>Perfil</h1>
 
             {loading && <p>Cargando datos personales...</p>}

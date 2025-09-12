@@ -11,7 +11,7 @@ export const BulletinBoard = () => (
         key={index}
         title={announcement.title}
         content={announcement.content}
-        date={announcement.date}
+        date={announcement.date.toString()}
       />
     )}
   />

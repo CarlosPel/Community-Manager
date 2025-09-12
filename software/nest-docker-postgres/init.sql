@@ -20,21 +20,11 @@ CREATE TABLE Incidents (
     FOREIGN KEY (id) REFERENCES Announcements(id)
 );
 
--- Persons
-DROP TABLE IF EXISTS Persons CASCADE;
-CREATE TABLE Persons (
-    id INT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    phone_number VARCHAR(20),
-    email VARCHAR(100)
-);
-
 -- Premises
 DROP TABLE IF EXISTS Premises CASCADE;
 CREATE TABLE Premises (
     id INT PRIMARY KEY,
     tenant_id INT NOT NULL,
-    FOREIGN KEY (tenant_id) REFERENCES Persons(id)
 );
 
 -- Owners (Person subtype)
@@ -42,7 +32,6 @@ DROP TABLE IF EXISTS Owners CASCADE;
 CREATE TABLE Owners (
     id INT PRIMARY KEY,
     premises_id INT NOT NULL,
-    FOREIGN KEY (id) REFERENCES Persons(id),
     FOREIGN KEY (premises_id) REFERENCES Premises(id)
 );
 
@@ -61,7 +50,6 @@ DROP TABLE IF EXISTS Neighbors CASCADE;
 CREATE TABLE Neighbors (
     id INT PRIMARY KEY,
     apartment_id INT NOT NULL,
-    FOREIGN KEY (id) REFERENCES Persons(id),
     FOREIGN KEY (apartment_id) REFERENCES Apartments(id)
 );
 

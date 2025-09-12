@@ -20,18 +20,30 @@ CREATE TABLE Incidents (
     FOREIGN KEY (id) REFERENCES Announcements(id)
 );
 
+-- Users
+DROP TABLE IF EXISTS Users CASCADE;
+CREATE TABLE Users (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(20),
+    email VARCHAR(100),
+    is_admin BOOLEAN DEFAULT FALSE
+);
+
 -- Premises
 DROP TABLE IF EXISTS Premises CASCADE;
 CREATE TABLE Premises (
     id INT PRIMARY KEY,
     tenant_id INT NOT NULL,
+    FOREIGN KEY (tenant_id) REFERENCES Users(id)
 );
 
--- Owners (Person subtype)
+-- Owners (Users subtype)
 DROP TABLE IF EXISTS Owners CASCADE;
 CREATE TABLE Owners (
     id INT PRIMARY KEY,
     premises_id INT NOT NULL,
+    FOREIGN KEY (id) REFERENCES Users(id),
     FOREIGN KEY (premises_id) REFERENCES Premises(id)
 );
 
@@ -45,11 +57,12 @@ CREATE TABLE Apartments (
     FOREIGN KEY (owner_id) REFERENCES Owners(id)
 );
 
--- Neighbors (subtipo de Person)
+-- Neighbors (subtipo de Users)
 DROP TABLE IF EXISTS Neighbors CASCADE;
-CREATE TABLE Neighbors (
+CREATE TABLE Neighbours (
     id INT PRIMARY KEY,
     apartment_id INT NOT NULL,
+    FOREIGN KEY (id) REFERENCES Users(id),
     FOREIGN KEY (apartment_id) REFERENCES Apartments(id)
 );
 

@@ -2,27 +2,27 @@
 -- Community Manager Init SQL Script (Idempotente)
 -- ============================================
 
--- Announcement
-DROP TABLE IF EXISTS Announcement CASCADE;
-CREATE TABLE Announcement (
+-- Announcements
+DROP TABLE IF EXISTS Announcements CASCADE;
+CREATE TABLE Announcements (
     id SERIAL PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     content TEXT NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Incident
-DROP TABLE IF EXISTS Incident CASCADE;
-CREATE TABLE Incident (
+-- Incidents
+DROP TABLE IF EXISTS Incidents CASCADE;
+CREATE TABLE Incidents (
     id SERIAL PRIMARY KEY,
     criticality VARCHAR(50) NOT NULL,
     status VARCHAR(50) NOT NULL,
-    FOREIGN KEY (id) REFERENCES Announcement(id)
+    FOREIGN KEY (id) REFERENCES Announcements(id)
 );
 
--- Person
-DROP TABLE IF EXISTS Person CASCADE;
-CREATE TABLE Person (
+-- Persons
+DROP TABLE IF EXISTS Persons CASCADE;
+CREATE TABLE Persons (
     id INT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20),
@@ -34,35 +34,35 @@ DROP TABLE IF EXISTS Premises CASCADE;
 CREATE TABLE Premises (
     id INT PRIMARY KEY,
     tenant_id INT NOT NULL,
-    FOREIGN KEY (tenant_id) REFERENCES Person(id)
+    FOREIGN KEY (tenant_id) REFERENCES Persons(id)
 );
 
--- Owner (Person subtype)
-DROP TABLE IF EXISTS Owner CASCADE;
-CREATE TABLE Owner (
+-- Owners (Person subtype)
+DROP TABLE IF EXISTS Owners CASCADE;
+CREATE TABLE Owners (
     id INT PRIMARY KEY,
     premises_id INT NOT NULL,
-    FOREIGN KEY (id) REFERENCES Person(id),
+    FOREIGN KEY (id) REFERENCES Persons(id),
     FOREIGN KEY (premises_id) REFERENCES Premises(id)
 );
 
--- Apartment
-DROP TABLE IF EXISTS Apartment CASCADE;
-CREATE TABLE Apartment (
+-- Apartments
+DROP TABLE IF EXISTS Apartments CASCADE;
+CREATE TABLE Apartments (
     id INT PRIMARY KEY,
     floor INT,
     door VARCHAR(10),
     owner_id INT NOT NULL,
-    FOREIGN KEY (owner_id) REFERENCES Owner(id)
+    FOREIGN KEY (owner_id) REFERENCES Owners(id)
 );
 
--- Neighbor (subtipo de Person)
-DROP TABLE IF EXISTS Neighbor CASCADE;
-CREATE TABLE Neighbor (
+-- Neighbors (subtipo de Person)
+DROP TABLE IF EXISTS Neighbors CASCADE;
+CREATE TABLE Neighbors (
     id INT PRIMARY KEY,
     apartment_id INT NOT NULL,
-    FOREIGN KEY (id) REFERENCES Person(id),
-    FOREIGN KEY (apartment_id) REFERENCES Apartment(id)
+    FOREIGN KEY (id) REFERENCES Persons(id),
+    FOREIGN KEY (apartment_id) REFERENCES Apartments(id)
 );
 
 -- ----------
@@ -70,6 +70,6 @@ CREATE TABLE Neighbor (
 -------------
 
 -- Announcements
-INSERT INTO Announcement (id, title, content) VALUES
+INSERT INTO Announcements (id, title, content) VALUES
 (1, 'Maintenance Notice', 'Scheduled maintenance on 2024-07-01 from 10:00 to 12:00.'),
 (2, 'Community Event', 'Join us for a community BBQ on 2024-07-15 at the central park.');

@@ -9,5 +9,5 @@
 
 - DELETE FROM table_name
     WHERE condition;
-    
+
 - \i /path/to/script.sql

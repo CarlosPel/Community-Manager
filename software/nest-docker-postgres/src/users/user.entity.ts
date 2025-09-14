@@ -1,7 +1,7 @@
 // user.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
-import { Owner } from './owner.entity';
-import { Neighbour } from './neighbour.entity';
+import { Owner } from '../owners/owner.entity';
+import { Neighbour } from '../neighbours/neighbour.entity';
 
 @Entity('users')
 export class User {
@@ -22,8 +22,8 @@ export class User {
 
     // Relaciones con subtipos
     @OneToOne(() => Owner, (owner) => owner.user)
-    owner: Owner;
+    owner!: Owner;
 
     @OneToOne(() => Neighbour, (neighbour) => neighbour.user)
-    neighbour: Neighbour;
+    neighbour!: Neighbour;
 }

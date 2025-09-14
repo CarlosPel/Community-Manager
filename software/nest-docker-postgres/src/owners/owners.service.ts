@@ -13,14 +13,12 @@ export class OwnersService {
     ) { }
 
     async createOwner(dto: { name: string; email: string; premises_id: number }) {
-        // 1. Crear User
         const user = this.usersRepo.create({
             name: dto.name,
             email: dto.email,
         });
         const savedUser = await this.usersRepo.save(user);
 
-        // 2. Crear Owner con el mismo id
         const owner = this.ownersRepo.create({
             id: savedUser.id,
             premises_id: dto.premises_id,

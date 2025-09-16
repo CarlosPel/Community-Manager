@@ -28,7 +28,7 @@ export const SignupScreen = () => {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             if (!isOwner) {
-                await axios.post("http://localhost:3000/owners", {
+                await axios.post('/api/owners', {
                     name,
                     email,
                     premises,

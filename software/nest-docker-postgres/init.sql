@@ -58,8 +58,8 @@ CREATE TABLE Apartments (
 );
 
 -- Neighbors (subtipo de Users)
-DROP TABLE IF EXISTS Neighbors CASCADE;
-CREATE TABLE Neighbours (
+DROP TABLE IF EXISTS Tenants CASCADE;
+CREATE TABLE Tenants (
     id INT PRIMARY KEY,
     apartment_id INT NOT NULL,
     FOREIGN KEY (id) REFERENCES Users(id),
